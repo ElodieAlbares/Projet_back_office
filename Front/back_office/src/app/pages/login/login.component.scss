@@ -1,0 +1,85 @@
+$primary-color: #1e6f96;
+$hover-color: #46a5d1;
+$background-color: #ffffff;
+$highlight-background: #e6f8ff;
+$border-color: #1e6f96;
+$sand-color: #f5e4b8;
+$font-size: 16px;
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: $highlight-background;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid $border-color;
+  box-sizing: border-box;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: $primary-color;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: $primary-color;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    font-size: $font-size;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #ffffff;
+    transition: border 0.3s ease-in-out;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  .btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: $font-size;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: $hover-color;
+      color: white;   
+      border: 2px solid $primary-color;
+    }
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 15px;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
