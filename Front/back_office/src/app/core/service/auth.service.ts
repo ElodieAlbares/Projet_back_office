@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api/token/';  // L'URL de ton endpoint Django
+  private apiUrl = 'http://localhost:8000/api/token/';  // L'URL de ton endpoint Django
 
   constructor(private http: HttpClient) { }
 
