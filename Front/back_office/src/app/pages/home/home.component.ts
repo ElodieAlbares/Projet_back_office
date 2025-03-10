@@ -1,4 +1,3 @@
-// home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/service/auth.service';
 import { Router } from '@angular/router';
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.authService.isAuthenticated()) {
-      this.router.navigate(['/login']);  // Redirige vers la page de login si l'utilisateur n'est pas authentifié
+      this.router.navigate(['/login']);
     }
   }
 
