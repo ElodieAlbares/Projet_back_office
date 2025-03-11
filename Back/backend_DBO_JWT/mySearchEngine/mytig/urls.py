@@ -1,7 +1,6 @@
 from django.urls import path
 from mytig import views
 from django.views.generic.base import RedirectView
-from .views import CustomTokenObtainPairView,TokenRefreshView
 urlpatterns = [
     path('', views.RedirectionListeDeProduits.as_view(), name='projectRoot'),
     path('products/', views.RedirectionListeDeProduits.as_view(), name='mytigProducts'),
@@ -14,6 +13,4 @@ urlpatterns = [
 ###################
     path('onsaleproducts/', views.PromoList.as_view()),
     path('onsaleproduct/<int:pk>/', views.PromoDetail.as_view()),
-    path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
