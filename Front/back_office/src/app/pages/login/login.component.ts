@@ -24,7 +24,7 @@ export class LoginComponent {
         localStorage.setItem('access_token', response.access);
         localStorage.setItem('refresh_token', response.refresh);
 
-        this.router.navigate(['/home']);
+        this.router.navigate(['/products']);
       },
       (error) => {
         this.errorMessage = 'Identifiants incorrects';
