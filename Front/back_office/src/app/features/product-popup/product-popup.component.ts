@@ -6,9 +6,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatLabel } from '@angular/material/form-field';
-//composant de l'appolication (models/services...)
+//composant de l'application (models/services...)
 import { Transaction } from '../../core/models/transaction.model';
 import { Historique } from '../../core/models/historique.model';
+import { Product } from '../../core/models/product.model';
 import { ProductsService } from '../../core/service/products.service';
 
 @Component({
@@ -19,12 +20,12 @@ import { ProductsService } from '../../core/service/products.service';
   styleUrl: './product-popup.component.scss'
 })
 export class ProductPopupComponent {
-  originalData: any;
+  originalData: Product[];
   isChecked: boolean = false;
 
   //variables pour gérér transactions
-  newQuantity: number;
-  balance: number;
+  newQuantity: any;
+  balance: any;
 
   constructor(
     public dialogRef: MatDialogRef<ProductPopupComponent>,
@@ -39,70 +40,80 @@ export class ProductPopupComponent {
     this.isChecked = event.checked;  // Update the component's state
   }
 
-    // Ferme sans sauvegardé données
-    onCancel(): void {
-      this.dialogRef.close();
-    };
-    // Ferme et envoie données
-    onSave(): void {
-      const changes: Historique[] = [];
-      const trades: Transaction[] = [];
+  // Ferme sans sauvegardé données
+  onCancel(): void {
+    this.dialogRef.close();
+  };
 
-      if(this.originalData.price!==this.data.price){
+  // Ferme et envoie données
+  onSave(): void {
+    const changes: Historique[] = [];
+    const trades: Transaction[] = [];
+
+    this.data.forEach((product:Product) => {
+      //Fetch le produit original dans la table
+      const originalProduct = this.originalData.find(p => p.id === product.id);
+      if (!originalProduct) {
+        console.warn(`Original data not found for product with id: ${product.id}`);
+        return;
+      }
+
+      if(originalProduct.price!== product.price){
         changes.push({
-          id: this.data.id,
+          id: product.id,
           type: 'adjust',
           fieldName: 'price',
-          value: this.data.price,
-          oldValue: this.originalData.price,
+          value: product.price,
+          oldValue: originalProduct.price,
           timeStamp: new Date().toISOString(),
         })}
-      if(this.originalData.quantity !== this.data.quantity){
-        if(this.originalData.quantity > this.data.quantity && this.isChecked==false){
-          this.newQuantity= this.originalData.quantity - this.data.quantity;
-          this.balance= this.data.price * this.newQuantity;
+      if(originalProduct.quantity !== product.quantity){
+        if(originalProduct.quantity > product.quantity && this.isChecked==false){
+          this.newQuantity= originalProduct.quantity - product.quantity;
+          this.balance= originalProduct.price * this.newQuantity;
           trades.push({
-            id: this.data.id,
-            name: this.data.name,
-            price: this.data.price,
+            id: product.id,
+            name: product.name,
+            price: product.price,
             quantity: this.newQuantity,
             balance: this.balance,
             timeStamp: new Date().toISOString(),
           });
-         }
-        if(this.originalData.quantity < this.data.quantity && this.isChecked==false){
-          this.newQuantity= this.data.quantity - this.originalData.quantity;
-          this.balance= -(this.data.price * this.newQuantity);
+          }
+        if(originalProduct.quantity < product.quantity && this.isChecked==false){
+          this.newQuantity= product.quantity - originalProduct.quantity;
+          this.balance= -(product.price * this.newQuantity);
           trades.push({
-            id: this.data.id,
-            name: this.data.name,
-            price: this.data.price,
+            id: product.id,
+            name: product.name,
+            price: product.price,
             quantity: this.newQuantity,
             balance: this.balance,
             timeStamp: new Date().toISOString(),
           });
-           }
-        if(this.originalData.quantity>this.data.quantity && this.isChecked==true){
+            }
+        if(originalProduct.quantity>product.quantity && this.isChecked==true){
           changes.push({
-            id: this.data.id,
+            id: product.id,
             type: 'pertes',
             fieldName: 'quantity',
-             value: this.data.price,
-             oldValue: this.originalData.price,
-             timeStamp: new Date().toISOString(),
-           })
-         }
-         this.productService.updateProduct(this.data).subscribe(updatedProduct => {
-          // After updating the product, you can save the Historique and Transaction logs
-          this.productService.saveHistorique(changes).subscribe(() => {
-            console.log('Historique saved successfully!');
-          });
-          this.productService.saveTransaction(trades).subscribe(() => {
-            console.log('Transactions saved successfully!');
-          });
-         }
-        
+            value: product.price,
+            oldValue: originalProduct.price,
+            timeStamp: new Date().toISOString(),
+            })
+          }
+      }
+    });
+      this.productService.updateProduct(this.data).subscribe(updatedProducts => {
+      // Normalement, une fois les modifications apportés au produits, on devrait pouvoir sauvegarder les données de l'hisotiruqe et de la transaction
+      this.productService.saveHistorique(changes).subscribe(() => {
+        console.log('Historique saved successfully!');
+      });
+      this.productService.saveTransaction(trades).subscribe(() => {
+        console.log('Transactions saved successfully!');
+      });
+      }
+    )
       this.dialogRef.close(this.data);
     }
   }
-}

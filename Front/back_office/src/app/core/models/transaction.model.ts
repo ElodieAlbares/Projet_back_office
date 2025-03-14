@@ -1,4 +1,4 @@
-// product.model.ts
+// transaction.model.ts
 export interface Transaction {
     id: number;
     name: string;

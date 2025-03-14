@@ -12,11 +12,12 @@ import { Product } from '../models/product.model';
 })
 export class ProductsService {
   private apiUrl = 'http://127.0.0.1:8000/products/';
+  private productURL = 'assets/product.json';
 
   constructor(public http:HttpClient) { }
 
   getProducts(){
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.productURL);
   }
 
   // Enregistrer les produts modifiés

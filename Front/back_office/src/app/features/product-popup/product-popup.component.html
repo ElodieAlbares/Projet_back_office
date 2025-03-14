@@ -1,20 +1,27 @@
 <p>product-popup works!</p>
 <h1 mat-dialog-title>Edition produit et stock</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Prix</mat-label>
-    <input matInput [(ngModel)]="data.price" type="number" />
-  </mat-form-field>
-  <!--<mat-form-field>
-    <mat-label>Quantité</mat-label>
-    <input matInput [(ngModel)]="data.quantity" type="number" />
-  </mat-form-field>-->
+  <!-- Boucler dans les produits à éditer -->
+  <div *ngFor="let product of data">
+    <mat-form-field>
+      <mat-label>Prix</mat-label>
+      <input matInput [(ngModel)]="product.price" type="number" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Quantité</mat-label>
+      <input matInput [(ngModel)]="product.quantity" type="number" />
+    </mat-form-field>
+  </div>
+
+  <!-- Checkbox pour la perte de stpcl -->
   <mat-form-field>
     <mat-checkbox [(ngModel)]="isChecked">Pertes de stock</mat-checkbox>
-    <!--Ligne après seulement pour garder trace de l'état de isChecked-->
+    <!-- Display checkbox status -->
     <p>Selected: {{ isChecked ? 'Yes' : 'No' }}</p>
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-button (click)="onSave()">Save</button>
