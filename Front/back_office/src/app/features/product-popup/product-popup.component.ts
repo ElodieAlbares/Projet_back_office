@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 //Composant Material
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
@@ -15,13 +16,16 @@ import { ProductsService } from '../../core/service/products.service';
 @Component({
   selector: 'app-product-popup',
   standalone:true,
-  imports: [FormsModule, MatDialogModule, MatLabel, MatFormFieldModule, MatInputModule, MatCheckboxModule],
+  imports: [FormsModule, MatDialogModule, MatLabel, MatFormFieldModule, MatInputModule, MatCheckboxModule, CommonModule],
   templateUrl: './product-popup.component.html',
   styleUrl: './product-popup.component.scss'
 })
 export class ProductPopupComponent {
-  originalData: Product[];
-  isChecked: boolean = false;
+  //Sauvegarder les données de base pour permettre comparaison
+  originalData: Product[] = [];
+
+  //Gérer sattus de la checkox poru chaque produits
+  checkboxState: { [productId: number]: boolean } = {};
 
   //variables pour gérér transactions
   newQuantity: any;
@@ -33,11 +37,17 @@ export class ProductPopupComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.originalData={...data};
+    console.log(this.originalData);
+    this.data.forEach((product: Product) => {
+      if (this.checkboxState[product.id] === undefined) {
+        this.checkboxState[product.id] = false; //Faux de base
+      }
+    });
   }
   // Gére la checkbox
-  onCheckboxChange(event: any): void {
-    console.log('Checkbox changed:', event.checked);
-    this.isChecked = event.checked;  // Update the component's state
+  onCheckboxChange(event: any, product: Product): void {
+    this.checkboxState[product.id] = event.checked;  // Update the checkbox state for the product
+    console.log('Checkbox changed for product', product.id, 'Checked:', event.checked);
   }
 
   // Ferme sans sauvegardé données
@@ -52,11 +62,13 @@ export class ProductPopupComponent {
 
     this.data.forEach((product:Product) => {
       //Fetch le produit original dans la table
-      const originalProduct = this.originalData.find(p => p.id === product.id);
+      const originalProduct = Object.values(this.originalData).find(p => p.id === product.id);;
       if (!originalProduct) {
         console.warn(`Original data not found for product with id: ${product.id}`);
         return;
       }
+      //Récupérer le status de la checkbox
+      const isChecked = this.checkboxState[product.id];
 
       if(originalProduct.price!== product.price){
         changes.push({
@@ -68,7 +80,7 @@ export class ProductPopupComponent {
           timeStamp: new Date().toISOString(),
         })}
       if(originalProduct.quantity !== product.quantity){
-        if(originalProduct.quantity > product.quantity && this.isChecked==false){
+        if(originalProduct.quantity > product.quantity && !isChecked){
           this.newQuantity= originalProduct.quantity - product.quantity;
           this.balance= originalProduct.price * this.newQuantity;
           trades.push({
@@ -80,7 +92,7 @@ export class ProductPopupComponent {
             timeStamp: new Date().toISOString(),
           });
           }
-        if(originalProduct.quantity < product.quantity && this.isChecked==false){
+        if(originalProduct.quantity < product.quantity && !isChecked){
           this.newQuantity= product.quantity - originalProduct.quantity;
           this.balance= -(product.price * this.newQuantity);
           trades.push({
@@ -92,7 +104,7 @@ export class ProductPopupComponent {
             timeStamp: new Date().toISOString(),
           });
             }
-        if(originalProduct.quantity>product.quantity && this.isChecked==true){
+        if(originalProduct.quantity>product.quantity && isChecked){
           changes.push({
             id: product.id,
             type: 'pertes',

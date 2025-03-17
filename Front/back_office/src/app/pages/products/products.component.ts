@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 // Import de Angular Material
 import { MatTableModule } from '@angular/material/table';
 import { MatFormField } from '@angular/material/input';
@@ -97,8 +97,12 @@ export class ProductsComponent {
     }
 
     openEditDialog(product: Product): void {
+      const index = this.selectedProducts.indexOf(product);
+      if (index === -1) {
+        this.selectedProducts.push(product);
+      }
       const dialogRef = this.dialog.open(ProductPopupComponent, {
-        data: { ...product } // Pass a copy of the stock to prevent mutating the original directly
+        data: this.selectedProducts // Pass a copy of the stock to prevent mutating the original directly
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
@@ -111,7 +115,7 @@ export class ProductsComponent {
     //Ouvre le pop up pour édition de plusieurs produits
     openBulkEditDialog(): void {
       const dialogRef = this.dialog.open(ProductPopupComponent, {
-        data: { products: this.selectedProducts }, // Pass selected products for bulk edit
+        data: this.selectedProducts, // Pass selected products for bulk edit
       });
   
       dialogRef.afterClosed().subscribe((result) => {
@@ -119,7 +123,7 @@ export class ProductsComponent {
           console.log('Bulk products updated:', result);
           // Handle bulk update logic here
           this.selectedProducts.forEach((product) => {
-            const updatedProduct = result.find((updated) => updated.id === product.id);
+            const updatedProduct = result.find((updated:any) => updated.id === product.id);
             if (updatedProduct) {
               Object.assign(product, updatedProduct);
             }

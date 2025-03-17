@@ -11,15 +11,13 @@
     <mat-form-field>
       <mat-label>Quantité</mat-label>
       <input matInput [(ngModel)]="product.quantity" type="number" />
-    </mat-form-field>
-  </div>
-
-  <!-- Checkbox pour la perte de stpcl -->
-  <mat-form-field>
-    <mat-checkbox [(ngModel)]="isChecked">Pertes de stock</mat-checkbox>
+    </mat-form-field>  
+    <!-- Checkbox pour la perte de stock -->
+    <mat-checkbox [(ngModel)]="checkboxState[product.id]" 
+    (change)="onCheckboxChange($event, product)">Pertes de stock</mat-checkbox>
     <!-- Display checkbox status -->
-    <p>Selected: {{ isChecked ? 'Yes' : 'No' }}</p>
-  </mat-form-field>
+    <p>Selected: {{ checkboxState[product.id] ? 'Yes' : 'No' }}</p>
+  </div>
 </div>
 
 <div mat-dialog-actions>
