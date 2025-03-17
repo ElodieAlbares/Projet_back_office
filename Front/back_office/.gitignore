@@ -49,4 +49,6 @@ Thumbs.db
 **/__pycache__/
 
 #environnement 
-envPython/
+*/envPython/
+
+Back/envPython/
