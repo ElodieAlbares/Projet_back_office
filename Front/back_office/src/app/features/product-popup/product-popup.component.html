@@ -3,6 +3,7 @@
 <div mat-dialog-content>
   <!-- Boucler dans les produits à éditer -->
   <div *ngFor="let product of data">
+    <h3>{{product.name}}</h3>
     <mat-form-field>
       <mat-label>Prix</mat-label>
       <input matInput [(ngModel)]="product.price" type="number" />
