@@ -16,7 +16,7 @@
     <!-- Checkbox pour la perte de stock -->
     <mat-checkbox [(ngModel)]="checkboxState[product.id]" 
     (change)="onCheckboxChange($event, product)">Pertes de stock</mat-checkbox>
-    <!-- Display checkbox status -->
+    <!-- Display checkbox status for debugging purpose -->
     <!--<p>Selected: {{ checkboxState[product.id] ? 'Yes' : 'No' }}</p>-->
   </div>
 </div>
