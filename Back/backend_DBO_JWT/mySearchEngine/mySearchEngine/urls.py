@@ -37,6 +37,7 @@ urlpatterns = [
 ###################
 #...TME3 starts...#
     path('', include('monTiGMagasin.urls')),
+    path('', include('My_Bdd.urls')),
 #...end of TME3...#
 ###################
 #######################
