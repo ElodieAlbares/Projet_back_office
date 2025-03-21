@@ -37,76 +37,52 @@
 
 
 
+
+
+
 <div class="history">
-    <h2>Dashboard historique des ventes</h2>
+  <div class="graphique">
 
-    <div class="graph-resultat-global">
-        <div class="graphique">
-            <ngx-charts-bar-vertical
-            [view]="view"
-            [results]="single"
-            [gradient]="gradient"
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel">
-            </ngx-charts-bar-vertical>
+    <mat-card>
+     <h2>Dashboard historique des ventes</h2>
+     <ngx-charts-bar-vertical
+     [view]="view"
+     [results]="single"
+     [gradient]="gradient"
+     [xAxis]="showXAxis"
+     [yAxis]="showYAxis"
+     [legend]="showLegend"
+     [showXAxisLabel]="showXAxisLabel"
+     [showYAxisLabel]="showYAxisLabel"
+     [xAxisLabel]="xAxisLabel"
+     [yAxisLabel]="yAxisLabel">
+     </ngx-charts-bar-vertical>
     
-        </div>
-        
-        <div class="mat-label-container">
-            <mat-form-field appearance="fill">
-              <mat-label>Bénéfice:</mat-label>
-              <input matInput  value= {{benef}} readonly/>
-            </mat-form-field>
-          
-            <mat-form-field appearance="fill">
-              <mat-label>Impot sur les sociétés:</mat-label>
-              <input matInput value = {{impot}} readonly/>
-            </mat-form-field>
-          </div>
-        
-    </div>
-   
-
-    <!-- <div class="flex-container">
-
-        <div class="annee">
-            <mat-form-field appearance="fill">
-              <mat-label>Choisir une année</mat-label>
-              <mat-select [(ngModel)]="selectedAnnee"   (selectionChange)="onYearChange($event)">
-                <mat-option *ngFor="let option of optionsAnnee" [value]="option">
-                  {{ option }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-
-        <div class="intervalle-periode">
-            <mat-radio-group [(ngModel)]="dateSelectedOption" (change)="onDateIntervalleChange($event)"  [disabled]="isNotAccessible">
-              <mat-radio-button value="Trimestre">Trimestriel</mat-radio-button>
-              <mat-radio-button value="Mensuel">Mensuel</mat-radio-button>
-              <mat-radio-button value="Hebdomadaire">Hebdomadaire</mat-radio-button>
-            </mat-radio-group>
-        </div>
-    
-
-        <div class="produit">
-            <mat-form-field appearance="fill">
-              <mat-label>Choisir un produit</mat-label>
-              <mat-select [(ngModel)]="selectedProduit" (selectionChange)="onProductChange($event)">
-                <mat-option *ngFor="let option of optionsProduit" [value]="option">
-                  {{ option }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+  
+    </mat-card> 
+    <mat-card>
+     <div class="mat-label-container">
+       <mat-form-field appearance="fill">
+         <mat-label>Bénéfice:</mat-label>
+         <input matInput  value= {{benef}} readonly/>
+       </mat-form-field>
+     
+       <mat-form-field appearance="fill">
+         <mat-label>Impot sur les sociétés:</mat-label>
+         <input matInput value = {{impot}} readonly/>
+       </mat-form-field>
+     </div>
+    </mat-card>
+  
+  
+   </div>
 
 
-        
-    </div> -->
-   
 </div>
+
+<div class="graph-resultat-global">
+
+        
+        
+        
+</div>   

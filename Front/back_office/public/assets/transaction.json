@@ -8,6 +8,30 @@
         "timeStamp": "2025-01-01"
     },
     {
+        "id" :1,
+        "name" : "Poisson",
+        "price": 20,
+        "quantity": 0,
+        "balance": -200,
+        "timeStamp": "2025-02-02"
+    },
+    {
+        "id" :4,
+        "name" : "Espadon",
+        "price": 25,
+        "quantity": 10,
+        "balance": 250,
+        "timeStamp": "2025-03-03"
+    },
+    {
+        "id" :4,
+        "name" : "Espadon",
+        "price": 25,
+        "quantity": 5,
+        "balance": 120,
+        "timeStamp": "2025-07-07"
+    },
+    {
         "id" :2,
         "name" : "Crevette",
         "price": 10,
