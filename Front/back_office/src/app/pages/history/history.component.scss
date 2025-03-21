@@ -1,0 +1,83 @@
+$primary-color: #1e6f96;
+$hover-color: #46a5d1;
+$background-color: #ffffff;
+$highlight-background: #e6f8ff;
+$border-color: #1e6f96;
+$sand-color: #f5e4b8;
+$font-size: 16px;
+
+
+.pilote {
+  max-width: auto;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: $highlight-background;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid $border-color;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;  /* Aligner verticalement au centre */
+  justify-content: space-between;  /* Espacement égal entre les composants */
+  gap: 20px;  /* Espacement entre les composants */
+ 
+}
+
+
+
+.history {
+  max-width: auto;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: $highlight-background;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid $border-color;
+  box-sizing: border-box;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: $primary-color;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .graph-resultat-global{
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+  }
+
+  .graphique{
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+  }
+
+  .mat-label-container {
+    display: flex;
+    flex-direction: column;  /* Aligner les labels verticalement */
+    gap: 10px;               /* Espacement entre les labels */
+  }
+  
+  mat-form-field {
+    width: 100%;             /* Largeur des champs de formulaire */
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;  /* Aligner verticalement au centre */
+    justify-content: space-between;  /* Espacement égal entre les composants */
+    gap: 20px;  /* Espacement entre les composants */
+  }
+  
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: $primary-color;
+  }
+
+ 
+}
