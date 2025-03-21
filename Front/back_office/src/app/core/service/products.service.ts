@@ -17,7 +17,7 @@ export class ProductsService {
   constructor(public http:HttpClient) { }
 
   getProducts(){
-    return this.http.get<any[]>(this.productURL);
+    return this.http.get<any[]>(this.apiUrl);
   }
 
   // Enregistrer les produts modifiés

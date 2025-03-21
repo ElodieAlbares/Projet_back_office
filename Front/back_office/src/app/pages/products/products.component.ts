@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ProductsService } from '../../core/service/products.service';
 import { ProductPopupComponent } from '../../features/product-popup/product-popup.component';
 import { Product } from '../../core/models/product.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class ProductsComponent {
   seafood: any[]=[];
   selectedProducts: any[]=[];
 
-  constructor(private productService:ProductsService, public dialog:MatDialog){}
+  constructor(private productService:ProductsService, public dialog:MatDialog,private router: Router){}
 
   ngOnInit() {
     this.productService.getProducts().subscribe((data)=>{
@@ -39,7 +40,9 @@ export class ProductsComponent {
       console.log(error)
       });
     }
-
+    navigateToHistory():void{
+      this.router.navigate(['/history']);
+    }
     sortProducts():void{
       // S'assure que array sont vides
       this.fish = [];

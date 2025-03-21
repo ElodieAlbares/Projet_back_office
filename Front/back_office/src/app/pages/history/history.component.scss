@@ -1,0 +1,62 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.home-button {
+  font-size: 16px;
+  font-weight: bold;
+  color:#3f51b5;
+}
+
+mat-icon {
+  margin-right: 8px;
+}
+
+
+.card-container {
+  display: flex;
+  gap: 20px; /* Espacement entre les cartes */
+  justify-content: center; /* Centre les cartes horizontalement */
+  align-items: stretch; /* Permet aux cartes d'avoir la même hauteur */
+  
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    justify-content: center;
+  }
+
+  .first-card{
+    background-color:aliceblue;
+
+  }
+
+  .second-card{
+    background-color:aliceblue;
+
+  }
+
+  .custom-card {
+    flex: 1; /* Permet aux cartes de prendre un espace égal */
+    max-width: 600px; /* Évite que les cartes soient trop larges */
+    background-color: aqua;
+    padding: 20px;
+  }
+  
+  .label {
+    display: flex;
+    flex-direction: column; /* Aligner verticalement */
+    gap: 16px; /* Espacement entre les champs */
+    font-size: 18px;
+    font-weight: bold;
+    color: #3f51b5; /* Bleu Material */
+    margin-right: 8px; /* Espacement avec l'élément en dessous */
+    margin-left: 8px; /* Espacement avec l'élément en dessous */
+    
+  }
+
+}
+
