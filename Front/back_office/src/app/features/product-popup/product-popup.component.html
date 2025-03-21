@@ -1,4 +1,3 @@
-<p>product-popup works!</p>
 <h1 mat-dialog-title>Edition produit et stock</h1>
 <div mat-dialog-content>
   <!-- Boucler dans les produits à éditer -->
@@ -22,6 +21,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button (click)="onSave()">Save</button>
+  <button class="saveButton" mat-button (click)="onCancel()">Annuler</button>
+  <button class="saveButton" mat-button (click)="onSave()">Sauvegarder</button>
 </div>

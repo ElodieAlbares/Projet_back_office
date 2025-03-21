@@ -1,0 +1,35 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+table{
+    padding: 0rem 1rem 0rem 1rem;
+}
+
+h2{
+    padding-left:1rem;
+}
+
+.pacingDiv{
+    padding: 1rem;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+}
+
+.updateButton{
+    background-color:#1565c0;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25rem ;
+    border: none; 
+    font-size: 14px;
+    &:hover {
+      background-color: #1976d2;
+    }
+  }
+
+
+
+/* Styling for the checkbox for selection */
+mat-checkbox {
+  margin-right: 10px;
+}
