@@ -4,18 +4,23 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
 import { MatCard } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio'; 
 import { MatFormField, MatSelectModule } from '@angular/material/select'; 
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [NgxChartsModule, FormsModule, MatRadioModule, MatSelectModule, MatInputModule, MatFormField, MatCard],
+  imports: [NgxChartsModule, RouterModule, MatIcon, FormsModule, MatRadioModule, MatSelectModule, MatInputModule, MatFormField, MatCard, MatToolbarModule],
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
 export class HistoryComponent {
+
+
   view: [number, number] = [700, 400];
 
   showXAxis = true;
@@ -80,6 +85,7 @@ export class HistoryComponent {
     if (this.selectedAnnee == this.optionsAnnee[0]){
       this.transactionDictionary = this.service.calculeChiffreAffaireAnnuel(this.selectedProduit);
     }
+    console.log(this.dateSelectedOption)
     switch(this.dateSelectedOption){
       case "Trimestre":
         this.transactionDictionary = this.service.yearHistory(this.selectedAnnee, this.selectedProduit);
@@ -91,6 +97,7 @@ export class HistoryComponent {
         this.transactionDictionary = this.service.weekHistory(this.selectedAnnee, this.selectedProduit);
         break;
       default:
+        this.transactionDictionary = this.service.yearHistory(this.selectedAnnee, this.selectedProduit);
         break;
     }
     this.bilanComptable();
@@ -132,5 +139,6 @@ export class HistoryComponent {
       value: this.transactionDictionary[key]
     }));    
   }
+
 
 }
